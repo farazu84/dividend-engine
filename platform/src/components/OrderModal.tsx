@@ -81,7 +81,6 @@ export function OrderModal({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          user_id: 1, // Stubbed user_id
           series_id: seriesId,
           term: term,
           amount: numericAmount,

@@ -3,7 +3,6 @@ import './OrderHistory.css'
 
 interface Order {
   id: number
-  user_id: number
   series_id: string
   term: string
   amount: number
@@ -28,7 +27,7 @@ export function OrderHistory() {
 
     const fetchOrders = async () => {
       try {
-        const response = await fetch('http://localhost:8000/orders?user_id=1')
+        const response = await fetch('http://localhost:8000/orders')
         const data = await response.json()
         setOrders(data)
       } catch (err) {

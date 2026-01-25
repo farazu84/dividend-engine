@@ -74,64 +74,14 @@ A full-stack treasury yield management application that allows users to view rea
 
 The application uses **SQLite** for data persistence. The database file (`modernfi.db`) is automatically created in the `server/` directory when the backend starts.
 
-### Schema
-
-**Users**
-| Column | Type | Description |
-|--------|------|-------------|
-| id | Integer | Primary key |
-| name | String | User's display name |
-| email | String | Unique email address |
-| role | String | User role (e.g., "Senior Treasurer") |
-| created_at | DateTime | Account creation timestamp |
 
 **Orders**
 | Column | Type | Description |
 |--------|------|-------------|
 | id | Integer | Primary key |
-| user_id | Integer | Foreign key to Users |
 | series_id | String | Treasury series (e.g., "DGS10") |
 | term | String | Maturity term (e.g., "10Y") |
 | amount | Float | Order amount in USD |
 | yield_rate | Float | Yield at time of order |
 | status | String | "filled", "pending", or "cancelled" |
 | ordered_at | DateTime | Order submission timestamp |
-
-
-## Project Structure
-
-```
-modernfi-take-home/
-├── server/                 # FastAPI backend
-│   ├── app/
-│   │   ├── endpoints/      # API route handlers
-│   │   ├── logic/          # Business logic
-│   │   ├── database.py     # Database configuration
-│   │   ├── models.py       # SQLAlchemy models
-│   │   └── main.py         # FastAPI app entry point
-│   └── pyproject.toml      # Python dependencies
-│
-└── platform/               # React frontend
-    ├── src/
-    │   ├── components/     # React components
-    │   ├── App.tsx         # Main app with routing
-    │   └── main.tsx        # Entry point
-    └── package.json        # Node dependencies
-```
-
-## Screenshots
-
-### Dashboard
-View the live treasury yield curve and benchmark instruments with 7-day performance.
-
-### Order Submission
-Place market or limit orders on treasury instruments.
-
-### Order History
-Review and filter historical trades with status tracking.
-
-## Notes
-
-- The application uses a stubbed user (ID: 1) for demonstration purposes
-- Market orders are immediately marked as "filled", limit orders as "pending"
-- Treasury yield data is fetched from the Federal Reserve Economic Data (FRED) API

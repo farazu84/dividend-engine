@@ -10,7 +10,6 @@ router = APIRouter(prefix="/orders", tags=["orders"])
 
 
 class OrderCreate(BaseModel):
-    user_id: int
     series_id: str
     term: str
     amount: float
@@ -20,7 +19,6 @@ class OrderCreate(BaseModel):
 
 class OrderResponse(BaseModel):
     id: int
-    user_id: int
     series_id: str
     term: str
     amount: float
@@ -32,24 +30,13 @@ class OrderResponse(BaseModel):
         from_attributes = True
 
 
-class OrderWithUser(OrderResponse):
-    user_name: str
-    user_email: str
-
-
 @router.post("", response_model=OrderResponse)
 def create_order(order: OrderCreate, db: Session = Depends(get_db)):
     """Create a new order."""
-    # Verify user exists
-    user = db.query(models.User).filter(models.User.id == order.user_id).first()
-    if not user:
-        raise HTTPException(status_code=404, detail="User not found")
-    
     # Market orders are immediately filled, limit orders are pending
     status = models.OrderStatus.FILLED.value if order.order_type == "market" else models.OrderStatus.PENDING.value
     
     db_order = models.Order(
-        user_id=order.user_id,
         series_id=order.series_id,
         term=order.term,
         amount=order.amount,
@@ -63,16 +50,9 @@ def create_order(order: OrderCreate, db: Session = Depends(get_db)):
 
 
 @router.get("", response_model=list[OrderResponse])
-def get_orders(user_id: int, db: Session = Depends(get_db)):
-    """Get orders for a specific user."""
-    # Verify user exists
-    user = db.query(models.User).filter(models.User.id == user_id).first()
-    if not user:
-        raise HTTPException(status_code=404, detail="User not found")
-    
-    return db.query(models.Order).filter(
-        models.Order.user_id == user_id
-    ).order_by(models.Order.ordered_at.desc()).all()
+def get_orders(db: Session = Depends(get_db)):
+    """Get all orders."""
+    return db.query(models.Order).order_by(models.Order.ordered_at.desc()).all()
 
 
 @router.get("/{order_id}", response_model=OrderResponse)
