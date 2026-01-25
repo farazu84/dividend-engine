@@ -45,9 +45,6 @@ export function OrderModal({
     }
   }
 
-  const setMinAmount = () => setAmount('100000')
-  const setMaxAmount = () => setAmount('50000000')
-
   const handleLimitYieldChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
     if (value === '' || /^\d*\.?\d{0,3}$/.test(value)) {
@@ -149,10 +146,6 @@ export function OrderModal({
                 onChange={handleAmountChange}
                 className="amount-input"
               />
-              <div className="amount-buttons">
-                <button onClick={setMinAmount}>MIN</button>
-                <button onClick={setMaxAmount}>MAX</button>
-              </div>
             </div>
           </div>
 

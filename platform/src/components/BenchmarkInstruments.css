@@ -9,10 +9,70 @@
   margin-bottom: 1rem;
 }
 
+.benchmark-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
 .benchmark-header h2 {
   font-size: 1rem;
   font-weight: 600;
   color: var(--text-primary);
+}
+
+.benchmark-subtitle {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.tooltip-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.tooltip-icon {
+  font-size: 16px;
+  color: var(--text-muted);
+  cursor: default;
+  transition: color 0.2s;
+}
+
+.tooltip-icon:hover {
+  color: var(--text-secondary);
+}
+
+.tooltip-text {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 8px);
+  background-color: var(--bg-tertiary);
+  color: #ffffff;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: opacity 0.2s, visibility 0.2s;
+  z-index: 10;
+}
+
+.tooltip-text::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 12px;
+  border: 6px solid transparent;
+  border-top-color: var(--border-color);
+}
+
+.tooltip-wrapper:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
 }
 
 .manage-btn {

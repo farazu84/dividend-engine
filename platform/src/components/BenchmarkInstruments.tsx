@@ -21,7 +21,14 @@ export function BenchmarkInstruments() {
   return (
     <div className="benchmark-instruments">
       <div className="benchmark-header">
-        <h2>Benchmark Instruments</h2>
+        <div className="benchmark-title">
+          <h2>Benchmark Instruments</h2>
+          <span className="benchmark-subtitle">Latest Market Data</span>
+          <div className="tooltip-wrapper">
+            <span className="material-icons-outlined tooltip-icon">info</span>
+            <span className="tooltip-text">Select Treasury Note to Place an Order</span>
+          </div>
+        </div>
         <button className="manage-btn" onClick={() => setIsModalOpen(true)}>
           <span className="material-icons-outlined">settings</span>
           Manage Watchlist

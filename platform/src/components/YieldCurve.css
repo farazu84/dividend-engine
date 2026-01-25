@@ -1,0 +1,128 @@
+.yield-curve-card {
+  background-color: var(--bg-secondary);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  padding: 1.5rem;
+}
+
+.yield-curve-card .card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.yield-curve-card .card-title h2 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.yield-curve-card .card-subtitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.yield-curve-card .date-separator {
+  color: var(--text-muted);
+}
+
+.yield-curve-card .date-label {
+  color: var(--text-muted);
+}
+
+.yield-curve-card .date-picker-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.yield-curve-card .date-picker {
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.yield-curve-card .date-picker:hover {
+  border-color: var(--accent-blue);
+  background-color: var(--bg-secondary);
+}
+
+.yield-curve-card .date-picker:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+/* Style the calendar icon */
+.yield-curve-card .date-picker::-webkit-calendar-picker-indicator {
+  filter: invert(0.7);
+  cursor: pointer;
+}
+
+.yield-curve-card .curve-legend {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.yield-curve-card .legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.03em;
+}
+
+.yield-curve-card .legend-item .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.yield-curve-card .legend-item .dot.live {
+  background-color: var(--accent-blue);
+}
+
+.yield-curve-card .chart-container {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Hide TradingView watermark */
+.yield-curve-card .chart-container a[href*="tradingview"] {
+  display: none !important;
+}
+
+.yield-curve-card .chart-container div[style*="position: absolute"] a {
+  display: none !important;
+}
+
+.yield-curve-loading,
+.yield-curve-error,
+.yield-curve-no-data {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  color: var(--text-secondary);
+}
+
+.yield-curve-error {
+  color: var(--accent-red);
+}
+
+.yield-curve-no-data {
+  color: var(--text-muted);
+  font-style: italic;
+}

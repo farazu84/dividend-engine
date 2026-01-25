@@ -6,9 +6,14 @@ router = APIRouter(prefix="/yields", tags=["yields"])
 
 
 @router.get("")
-def get_yields():
-    """Get current treasury yield curve data."""
-    return yields.get_treasury_yields()
+async def get_yields(date: str | None = None):
+    """Get treasury yield curve data.
+
+    Args:
+        date: Optional date in YYYY-MM-DD format. If provided, fetches yields
+              for that specific date. Otherwise returns the most recent data.
+    """
+    return await yields.get_treasury_yields(date)
 
 
 @router.get("/history/{series_id}")

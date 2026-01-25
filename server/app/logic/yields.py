@@ -1,11 +1,17 @@
+import asyncio
 import os
+
 import httpx
+from cachetools import TTLCache
 from dotenv import load_dotenv
 
 load_dotenv()
 
 FRED_API_KEY = os.getenv("FRED_API_KEY")
 FRED_BASE_URL = "https://api.stlouisfed.org/fred/series/observations"
+
+# Cache for yield data - max 100 entries, 1 hour TTL
+_yields_cache: TTLCache = TTLCache(maxsize=100, ttl=3600)
 
 # Treasury yield series codes and their maturities
 TREASURY_SERIES = [
@@ -23,41 +29,70 @@ TREASURY_SERIES = [
 ]
 
 
-def get_treasury_yields():
-    """Fetch treasury yield curve data from FRED API."""
-    yields = []
+async def _fetch_series(
+    client: httpx.AsyncClient, series: dict, date: str | None = None
+) -> dict | None:
+    """Fetch a single treasury series from FRED API."""
+    params = {
+        "series_id": series["series_id"],
+        "api_key": FRED_API_KEY,
+        "file_type": "json",
+        "limit": 1,
+        "sort_order": "desc",
+    }
 
-    with httpx.Client(timeout=30.0) as client:
-        for series in TREASURY_SERIES:
-            try:
-                response = client.get(
-                    FRED_BASE_URL,
-                    params={
-                        "series_id": series["series_id"],
-                        "api_key": FRED_API_KEY,
-                        "file_type": "json",
-                        "limit": 1,
-                        "sort_order": "desc",
-                    },
-                )
-                data = response.json()
-            except httpx.TimeoutException:
-                print(f"Timeout fetching {series['series_id']}")
-                continue
+    if date:
+        params["observation_start"] = date
+        params["observation_end"] = date
 
-            if data.get("observations") and len(data["observations"]) > 0:
-                obs = data["observations"][0]
-                value = obs.get("value")
-                
-                if value and value != ".":
-                    yields.append({
-                        "term": series["term"],
-                        "maturity_months": series["maturity_months"],
-                        "yield_rate": float(value),
-                        "date": obs.get("realtime_end"),
-                    })
+    try:
+        response = await client.get(FRED_BASE_URL, params=params)
+        data = response.json()
+    except httpx.TimeoutException:
+        print(f"Timeout fetching {series['series_id']}")
+        return None
 
-    return {"yields": yields}
+    if data.get("observations") and len(data["observations"]) > 0:
+        obs = data["observations"][0]
+        value = obs.get("value")
+
+        if value and value != ".":
+            return {
+                "term": series["term"],
+                "maturity_months": series["maturity_months"],
+                "yield_rate": float(value),
+                "date": obs.get("date"),
+            }
+    return None
+
+
+async def get_treasury_yields(date: str | None = None):
+    """Fetch treasury yield curve data from FRED API concurrently.
+
+    Args:
+        date: Optional date in YYYY-MM-DD format. If provided, fetches yields
+              for that specific date. Otherwise returns the most recent data.
+
+    Results are cached with LRU eviction (max 100 entries) and 1 hour TTL.
+    """
+    cache_key = date or "latest"
+
+    # Check cache
+    if cache_key in _yields_cache:
+        return _yields_cache[cache_key]
+
+    # Fetch from FRED
+    async with httpx.AsyncClient(timeout=30.0) as client:
+        tasks = [_fetch_series(client, series, date) for series in TREASURY_SERIES]
+        results = await asyncio.gather(*tasks)
+
+    yields = [r for r in results if r is not None]
+    result = {"yields": yields, "date": date}
+
+    # Cache the result
+    _yields_cache[cache_key] = result
+
+    return result
 
 
 def get_yield_history(series_id: str):
