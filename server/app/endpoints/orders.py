@@ -14,7 +14,7 @@ class OrderCreate(BaseModel):
     term: str
     amount: float
     yield_rate: float
-    order_type: str = "market"  # "market" or "limit"
+    order_type: str = "market"
 
 
 class OrderResponse(BaseModel):

@@ -60,7 +60,6 @@ function MiniChart({ data, isPositive, seriesId }: { data: Observation[], isPosi
 
     const color = isPositive ? '#22c55e' : '#ef4444'
 
-    // Draw area fill
     ctx.beginPath()
     ctx.moveTo(points[0].x, height)
     points.forEach(point => ctx.lineTo(point.x, point.y))
@@ -73,7 +72,6 @@ function MiniChart({ data, isPositive, seriesId }: { data: Observation[], isPosi
     ctx.fillStyle = gradient
     ctx.fill()
 
-    // Draw line
     ctx.beginPath()
     ctx.moveTo(points[0].x, points[0].y)
     points.slice(1).forEach(point => ctx.lineTo(point.x, point.y))
