@@ -68,6 +68,13 @@ export function OrderModal({
       return
     }
 
+    // For buy limit orders, target yield must be higher than current yield
+    // (higher yield = lower price, so we're waiting for a better buying opportunity)
+    if (orderType === 'limit' && yieldToSubmit <= currentYield) {
+      alert(`For a limit buy order, the target yield must be higher than the current market yield (${currentYield.toFixed(3)}%). A higher yield means a lower bond price.`)
+      return
+    }
+
     setIsSubmitting(true)
     try {
       const response = await fetch('http://localhost:8000/orders', {
@@ -97,6 +104,8 @@ export function OrderModal({
   }
 
   const isPositive = changeBps >= 0
+  const limitYieldNum = parseFloat(limitYield)
+  const isLimitYieldValid = orderType === 'market' || (limitYieldNum > currentYield)
 
   return (
     <div className="order-modal-overlay" onClick={handleOverlayClick}>
@@ -173,9 +182,9 @@ export function OrderModal({
             <div className="form-group">
               <div className="form-label-row">
                 <label>TARGET YIELD</label>
-                <span className="form-hint">ANNUAL PERCENTAGE</span>
+                <span className="form-hint">MUST BE &gt; {currentYield.toFixed(3)}%</span>
               </div>
-              <div className="yield-input-wrapper">
+              <div className={`yield-input-wrapper ${!isLimitYieldValid && limitYield ? 'invalid' : ''}`}>
                 <input
                   type="text"
                   value={limitYield}
@@ -185,6 +194,9 @@ export function OrderModal({
                 />
                 <span className="yield-symbol">%</span>
               </div>
+              {!isLimitYieldValid && limitYield && (
+                <span className="validation-error">Target yield must be higher than current market yield</span>
+              )}
             </div>
           )}
 
@@ -196,7 +208,7 @@ export function OrderModal({
               </p>
             ) : (
               <p>
-                Limit order will execute when the yield reaches <strong>{limitYield || '0.000'}%</strong>.
+                Buy limit order will execute when yield rises to <strong>{limitYield || '0.000'}%</strong> (lower price). Target must be above current yield.
               </p>
             )}
           </div>

@@ -192,6 +192,19 @@
   border-radius: 8px;
   padding: 0.75rem 1rem;
   gap: 0.5rem;
+  transition: border-color 0.2s;
+}
+
+.yield-input-wrapper.invalid {
+  border-color: var(--accent-red);
+  background-color: rgba(239, 68, 68, 0.05);
+}
+
+.validation-error {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.7rem;
+  color: var(--accent-red);
 }
 
 .yield-symbol {
