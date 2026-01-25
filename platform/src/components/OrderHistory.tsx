@@ -7,6 +7,7 @@ interface Order {
   term: string
   amount: number
   yield_rate: number
+  order_type: string
   status: string
   ordered_at: string
 }
@@ -148,9 +149,10 @@ export function OrderHistory() {
           <div className="col-date">TRADE DATE/TIME</div>
           <div className="col-instrument">INSTRUMENT</div>
           <div className="col-side">SIDE</div>
+          <div className="col-type">TYPE</div>
           <div className="col-status">STATUS</div>
           <div className="col-yield">YIELD (%)</div>
-          <div className="col-quantity">QUANTITY (PAR)</div>
+          <div className="col-quantity">AMOUNT (USD)</div>
         </div>
 
         {paginatedOrders.length === 0 ? (
@@ -169,6 +171,11 @@ export function OrderHistory() {
                 <span className="side-indicator buy">
                   <span className="material-icons-outlined">arrow_upward</span>
                   BUY
+                </span>
+              </div>
+              <div className="col-type">
+                <span className={`type-badge ${order.order_type}`}>
+                  {order.order_type.charAt(0).toUpperCase() + order.order_type.slice(1)}
                 </span>
               </div>
               <div className="col-status">

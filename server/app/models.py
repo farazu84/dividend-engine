@@ -11,6 +11,11 @@ class OrderStatus(str, enum.Enum):
     CANCELLED = "cancelled"
 
 
+class OrderType(str, enum.Enum):
+    MARKET = "market"
+    LIMIT = "limit"
+
+
 class Order(Base):
     __tablename__ = "orders"
 
@@ -19,5 +24,6 @@ class Order(Base):
     term = Column(String, nullable=False)
     amount = Column(Float, nullable=False)
     yield_rate = Column(Float, nullable=False)
+    order_type = Column(String, default=OrderType.MARKET.value)
     status = Column(String, default=OrderStatus.PENDING.value)
     ordered_at = Column(DateTime, default=datetime.utcnow)

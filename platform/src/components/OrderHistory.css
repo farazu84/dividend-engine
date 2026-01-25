@@ -95,7 +95,7 @@
 
 .table-header {
   display: grid;
-  grid-template-columns: 1.2fr 1.5fr 0.8fr 0.8fr 0.8fr 1fr;
+  grid-template-columns: 1.2fr 1.4fr 0.7fr 0.7fr 0.8fr 0.8fr 1fr;
   padding: 1rem 1.5rem;
   border-bottom: 1px solid var(--border-color);
   font-size: 0.7rem;
@@ -106,7 +106,7 @@
 
 .table-row {
   display: grid;
-  grid-template-columns: 1.2fr 1.5fr 0.8fr 0.8fr 0.8fr 1fr;
+  grid-template-columns: 1.2fr 1.4fr 0.7fr 0.7fr 0.8fr 0.8fr 1fr;
   padding: 1rem 1.5rem;
   border-bottom: 1px solid var(--border-color);
   align-items: center;
@@ -177,6 +177,27 @@
 
 .side-indicator.sell {
   color: var(--accent-red);
+}
+
+.col-type {
+  display: flex;
+}
+
+.type-badge {
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.type-badge.market {
+  background-color: rgba(59, 130, 246, 0.15);
+  color: var(--accent-blue);
+}
+
+.type-badge.limit {
+  background-color: rgba(168, 85, 247, 0.15);
+  color: #a855f7;
 }
 
 .col-status {

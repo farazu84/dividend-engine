@@ -23,6 +23,7 @@ class OrderResponse(BaseModel):
     term: str
     amount: float
     yield_rate: float
+    order_type: str
     status: str
     ordered_at: datetime
 
@@ -41,6 +42,7 @@ def create_order(order: OrderCreate, db: Session = Depends(get_db)):
         term=order.term,
         amount=order.amount,
         yield_rate=order.yield_rate,
+        order_type=order.order_type,
         status=status
     )
     db.add(db_order)

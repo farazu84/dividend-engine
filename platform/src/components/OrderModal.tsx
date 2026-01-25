@@ -139,8 +139,7 @@ export function OrderModal({
         <div className="order-form">
           <div className="form-group">
             <div className="form-label-row">
-              <label>QUANTITY</label>
-              <span className="form-hint">USD PAR VALUE</span>
+              <label>AMOUNT USD</label>
             </div>
             <div className="amount-input-wrapper">
               <span className="currency-symbol">$</span>
@@ -165,7 +164,7 @@ export function OrderModal({
                 onClick={() => setOrderType('market')}
               >
                 <span className="type-name">Market</span>
-                <span className="type-desc">Best Yield</span>
+                <span className="type-desc">Current Yield</span>
               </button>
               <button 
                 className={`order-type-btn ${orderType === 'limit' ? 'active' : ''}`}
