@@ -1,0 +1,129 @@
+.dashboard {
+  padding: 1.5rem;
+}
+
+.loading,
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  color: var(--text-secondary);
+}
+
+.error {
+  color: var(--accent-red);
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.breadcrumb .separator {
+  color: var(--text-muted);
+}
+
+.breadcrumb .current {
+  color: var(--text-primary);
+}
+
+.market-status {
+  margin-left: 1rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.market-status.open {
+  background-color: rgba(34, 197, 94, 0.15);
+  color: var(--accent-green);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.powered-by {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.powered-by .fred-label {
+  color: var(--accent-blue);
+  font-weight: 500;
+}
+
+.yield-curve-card {
+  background-color: var(--bg-secondary);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  padding: 1.5rem;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.card-title h2 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.card-title p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.curve-legend {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.03em;
+}
+
+.legend-item .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.legend-item .dot.live {
+  background-color: var(--accent-blue);
+}
+
+.chart-container {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Hide TradingView watermark */
+.chart-container a[href*="tradingview"] {
+  display: none !important;
+}
+
+.chart-container div[style*="position: absolute"] a {
+  display: none !important;
+}

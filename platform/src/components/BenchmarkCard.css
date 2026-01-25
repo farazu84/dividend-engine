@@ -1,0 +1,120 @@
+.benchmark-card {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.benchmark-card:hover {
+  border-color: var(--text-muted);
+}
+
+.card-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.card-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.card-ticker {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 0.125rem;
+}
+
+.trend-icon .material-icons-outlined {
+  font-size: 20px;
+}
+
+.trend-icon .positive {
+  color: var(--accent-green);
+}
+
+.trend-icon .negative {
+  color: var(--accent-red);
+}
+
+.card-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 0.5rem;
+}
+
+.yield-value {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.mini-chart {
+  width: 80px;
+  height: 32px;
+  position: relative;
+}
+
+/* Hide TradingView watermark */
+.mini-chart a[href*="tradingview"] {
+  display: none !important;
+}
+
+.mini-chart div[style*="position: absolute"] a {
+  display: none !important;
+}
+
+.yield-change-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.yield-change {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.yield-change .material-icons-outlined {
+  font-size: 14px;
+}
+
+.yield-change.positive {
+  color: var(--accent-green);
+}
+
+.yield-change.negative {
+  color: var(--accent-red);
+}
+
+.time-badge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background-color: var(--bg-tertiary);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}
