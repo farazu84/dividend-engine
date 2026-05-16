@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.endpoints import yields, health, orders
+from app.screener import endpoints as screener_endpoints
 from app.database import engine
 from app import models
 
@@ -21,3 +22,4 @@ app.add_middleware(
 app.include_router(health.router)
 app.include_router(yields.router)
 app.include_router(orders.router)
+app.include_router(screener_endpoints.router)

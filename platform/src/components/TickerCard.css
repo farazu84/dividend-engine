@@ -1,0 +1,171 @@
+.de-card {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.055);
+  border-radius: 12px;
+  padding: 0;
+  cursor: pointer;
+  overflow: hidden;
+  font-family: inherit;
+  transition: border-color 160ms ease, background 160ms ease, transform 160ms ease;
+  width: 100%;
+}
+
+.de-card--hovered {
+  border-color: rgba(120, 200, 230, 0.22);
+  background: rgba(120, 200, 230, 0.03);
+  transform: translateY(-1px);
+}
+
+.de-card--skeleton {
+  pointer-events: none;
+}
+
+.de-card__header {
+  padding: 15px 16px 11px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.tc-identity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.de-card__ticker {
+  font-size: 15px;
+  font-weight: 600;
+  color: #e2e8f0;
+  letter-spacing: -0.3px;
+  line-height: 1.2;
+}
+
+.de-card__name {
+  font-size: 11px;
+  color: #94a3b8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 170px;
+  margin-top: 2px;
+}
+
+.de-sector-pill {
+  font-size: 9.5px;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 3px 8px;
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.de-card__price-row {
+  padding: 0 16px 13px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.de-card__price {
+  font-size: 24px;
+  font-weight: 600;
+  color: #e2e8f0;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: -0.6px;
+  line-height: 1;
+}
+
+.de-card__decline {
+  font-size: 11px;
+  color: #fca5a5;
+  margin-top: 4px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.de-card__stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+.tc-stat {
+  padding: 10px 14px;
+}
+
+.tc-stat__value {
+  margin-top: 3px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.de-card__payout {
+  padding: 10px 14px 8px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+.tc-payout__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.tc-payout__track {
+  height: 4px;
+  background: rgba(148,163,184,0.12);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.tc-payout__fill {
+  height: 100%;
+  background: oklch(0.65 0.10 60);
+  border-radius: 999px;
+}
+
+.de-card__index {
+  padding: 8px 14px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  display: flex;
+  align-items: center;
+}
+
+.de-index-chip {
+  font-size: 10.5px;
+  padding: 2px 7px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 4px;
+  color: #cbd5e1;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.2px;
+}
+
+.de-card__footer {
+  margin-top: auto;
+  padding: 10px 16px;
+  background: rgba(255,255,255,0.015);
+  border-top: 1px solid rgba(255,255,255,0.04);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.de-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: oklch(0.82 0.10 215);
+  font-weight: 500;
+}

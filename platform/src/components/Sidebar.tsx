@@ -23,6 +23,13 @@ export function Sidebar({ activeNav }: SidebarProps) {
       <nav className="sidebar-nav">
         <Link
           to="/"
+          className={`nav-item ${activeNav === 'dividend-engine' ? 'active' : ''}`}
+        >
+          <span className="material-icons-outlined">trending_up</span>
+          Dividend Engine
+        </Link>
+        <Link
+          to="/dashboard"
           className={`nav-item ${activeNav === 'dashboard' ? 'active' : ''}`}
         >
           <span className="material-icons-outlined">dashboard</span>
